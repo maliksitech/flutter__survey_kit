@@ -77,6 +77,7 @@ class _TextAnswerViewState extends State<TextAnswerView> {
       child: Padding(
         padding: const EdgeInsets.only(left: 14.0, right: 14.0, bottom: 32.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
