@@ -46,10 +46,11 @@ class _ScaleAnswerViewState extends State<ScaleAnswerView> {
           ? Text(
               widget.questionStep.title,
               style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
             )
           : widget.questionStep.content,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
@@ -57,7 +58,7 @@ class _ScaleAnswerViewState extends State<ScaleAnswerView> {
             child: Text(
               widget.questionStep.text,
               style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
             ),
           ),
           Padding(

@@ -52,55 +52,65 @@ class _BooleanAnswerViewState extends State<BooleanAnswerView> {
       title: widget.questionStep.title.isNotEmpty
           ? Text(
               widget.questionStep.title,
-              style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
+              // textAlign: TextAlign.center,
             )
           : widget.questionStep.content,
       isValid: widget.questionStep.isOptional ||
           (_result != BooleanResult.NONE && _result != null),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 32.0),
-            child: Text(
-              widget.questionStep.text,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 32.0),
+              child: Text(
+                widget.questionStep.text,
+                style: Theme.of(context).textTheme.titleSmall,
+                // textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          Column(
-            children: [
-              Divider(
-                color: Colors.grey,
-              ),
-              SelectionListTile(
-                text: _answerFormat.positiveAnswer,
-                onTap: () {
-                  if (_result == BooleanResult.POSITIVE) {
-                    _result = null;
-                  } else {
-                    _result = BooleanResult.POSITIVE;
-                  }
-                  setState(() {});
-                },
-                isSelected: _result == BooleanResult.POSITIVE,
-              ),
-              SelectionListTile(
-                text: _answerFormat.negativeAnswer,
-                onTap: () {
-                  if (_result == BooleanResult.NEGATIVE) {
-                    _result = null;
-                  } else {
-                    _result = BooleanResult.NEGATIVE;
-                  }
-                  setState(() {});
-                },
-                isSelected: _result == BooleanResult.NEGATIVE,
-              ),
-            ],
-          ),
-        ],
+            Column(
+              children: [
+                // Divider(
+                //   color: Colors.grey,
+                // ),
+                SelectionListTile(
+                  text: _answerFormat.positiveAnswer,
+                  onTap: () {
+                    if (_result == BooleanResult.POSITIVE) {
+                      _result = null;
+                    } else {
+                      _result = BooleanResult.POSITIVE;
+                    }
+                    setState(() {});
+                  },
+                  isSelected: _result == BooleanResult.POSITIVE,
+                ),
+                listTileSpacer,
+                SelectionListTile(
+                  text: _answerFormat.negativeAnswer,
+                  onTap: () {
+                    if (_result == BooleanResult.NEGATIVE) {
+                      _result = null;
+                    } else {
+                      _result = BooleanResult.NEGATIVE;
+                    }
+                    setState(() {});
+                  },
+                  isSelected: _result == BooleanResult.NEGATIVE,
+                ),
+              ],
+            ),
+            bottomSpacer,
+          ],
+        ),
       ),
     );
   }
 }
+
+const bottomSpacer = SizedBox(
+  height: 36.0,
+);

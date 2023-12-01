@@ -5,6 +5,8 @@ import 'package:survey_kit/src/steps/predefined_steps/question_step.dart';
 import 'package:survey_kit/src/views/decoration/input_decoration.dart';
 import 'package:survey_kit/src/views/widget/step_view.dart';
 
+import 'widget/label_wrap.dart';
+
 class IntegerAnswerView extends StatefulWidget {
   final QuestionStep questionStep;
   final IntegerQuestionResult? result;
@@ -67,25 +69,26 @@ class _IntegerAnswerViewState extends State<IntegerAnswerView> {
           ? Text(
               widget.questionStep.title,
               style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
             )
           : widget.questionStep.content,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32.0),
+        padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          child: TextField(
+          child: LabeledTextField(
+            label: _integerAnswerFormat.hint,
             textInputAction: TextInputAction.next,
             autofocus: true,
             decoration: textFieldInputDecoration(
-              hint: _integerAnswerFormat.hint,
-            ),
+                // hint: _integerAnswerFormat.hint,
+                ),
             controller: _controller,
             onChanged: (String value) {
               _checkValidation(value);
             },
             keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
+            // textAlign: TextAlign.center,
           ),
         ),
       ),

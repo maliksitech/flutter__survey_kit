@@ -5,6 +5,8 @@ import 'package:survey_kit/src/steps/predefined_steps/question_step.dart';
 import 'package:survey_kit/src/views/decoration/input_decoration.dart';
 import 'package:survey_kit/src/views/widget/step_view.dart';
 
+import 'widget/label_wrap.dart';
+
 class TextAnswerView extends StatefulWidget {
   final QuestionStep questionStep;
   final TextQuestionResult? result;
@@ -69,38 +71,40 @@ class _TextAnswerViewState extends State<TextAnswerView> {
           ? Text(
               widget.questionStep.title,
               style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
             )
           : widget.questionStep.content,
       isValid: _isValid || widget.questionStep.isOptional,
-      child: Column(
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(bottom: 32.0, left: 14.0, right: 14.0),
-            child: Text(
-              widget.questionStep.text,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50.0,
-            child: TextField(
-              textInputAction: TextInputAction.next,
-              autofocus: true,
-              decoration: textFieldInputDecoration(
-                hint: _textAnswerFormat.hint,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 14.0, right: 14.0, bottom: 32.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 32.0),
+              child: Text(
+                widget.questionStep.text,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              controller: _controller,
-              textAlign: TextAlign.center,
-              onChanged: (String text) {
-                _checkValidation(text);
-              },
             ),
-          ),
-        ],
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: LabeledTextField(
+                label: _textAnswerFormat.hint,
+                textInputAction: TextInputAction.next,
+                autofocus: true,
+                decoration: textFieldInputDecoration(
+                    // hint: _textAnswerFormat.hint,
+                    ),
+                controller: _controller,
+                textAlign: TextAlign.left,
+                onChanged: (String text) {
+                  _checkValidation(text);
+                },
+                maxLines: _textAnswerFormat.maxLines,
+                minLines: _textAnswerFormat.minLines,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

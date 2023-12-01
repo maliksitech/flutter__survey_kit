@@ -29,6 +29,10 @@ class SurveyProgressConfiguration {
   /// BorderRadius.circular(14.0)
   final BorderRadius? borderRadius;
 
+  ///Will use hardcoded rendering for now
+  ///We can improve later
+  final bool showProgressOnPageBody;
+
   SurveyProgressConfiguration({
     this.progressbarColor = Colors.white,
     this.height = 6.0,
@@ -38,5 +42,6 @@ class SurveyProgressConfiguration {
     this.label,
     this.backgroundColor,
     this.valueProgressbarColor,
+    this.showProgressOnPageBody = false,
   });
 }

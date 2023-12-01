@@ -27,7 +27,8 @@ class _MyAppState extends State<MyApp> {
           child: Align(
             alignment: Alignment.center,
             child: FutureBuilder<Task>(
-              future: getJsonTask(),
+              // future: getJsonTask(),
+              future: getSampleTask(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.hasData &&
@@ -63,9 +64,24 @@ class _MyAppState extends State<MyApp> {
                         selectionColor: Colors.cyan,
                         selectionHandleColor: Colors.cyan,
                       ),
+                      listTileTheme: ListTileThemeData(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            side: BorderSide(
+                                width: 3.0,
+                                color: Theme.of(context).colorScheme.tertiary)),
+                      ),
                       cupertinoOverrideTheme: CupertinoThemeData(
                         primaryColor: Colors.cyan,
                       ),
+                      filledButtonTheme: FilledButtonThemeData(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.redAccent),
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(8.0))))),
                       outlinedButtonTheme: OutlinedButtonThemeData(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
@@ -126,12 +142,20 @@ class _MyAppState extends State<MyApp> {
                           fontSize: 24.0,
                           color: Colors.black,
                         ),
+                        labelMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
                         bodyMedium: TextStyle(
                           fontSize: 18.0,
                           color: Colors.black,
                         ),
                         titleMedium: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 24.0,
+                          color: Colors.black,
+                        ),
+                        titleSmall: TextStyle(
+                          fontSize: 20.0,
                           color: Colors.black,
                         ),
                       ),
@@ -149,8 +173,8 @@ class _MyAppState extends State<MyApp> {
                           .copyWith(background: Colors.white),
                     ),
                     surveyProgressbarConfiguration: SurveyProgressConfiguration(
-                      backgroundColor: Colors.white,
-                    ),
+                        backgroundColor: Colors.white,
+                        showProgressOnPageBody: true),
                   );
                 }
                 return CircularProgressIndicator.adaptive();
@@ -193,9 +217,10 @@ class _MyAppState extends State<MyApp> {
           text:
               'Tell us about yourself and why you want to improve your health.',
           answerFormat: TextAnswerFormat(
-            maxLines: 5,
-            validationRegEx: "^(?!\s*\$).+",
-          ),
+              maxLines: 1,
+              minLines: 1,
+              validationRegEx: "^(?!\s*\$).+",
+              hint: 'Tell us'),
         ),
         QuestionStep(
           title: 'Select your body type',

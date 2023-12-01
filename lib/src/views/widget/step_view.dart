@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:survey_kit/src/controller/survey_controller.dart';
-import 'package:survey_kit/src/result/question_result.dart';
 import 'package:survey_kit/src/steps/step.dart' as surveystep;
+
+import '../../../survey_kit.dart';
 
 class StepView extends StatelessWidget {
   final surveystep.Step step;
@@ -29,23 +29,54 @@ class StepView extends StatelessWidget {
   }
 
   Widget _content(SurveyController surveyController, BuildContext context) {
+    final progressbarConfiguration =
+        context.read<SurveyProgressConfiguration>();
     return SizedBox.expand(
       child: Container(
         color: Theme.of(context).colorScheme.background,
         child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 32.0),
-                  child: title,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (progressbarConfiguration.showProgressOnPageBody)
+                        Padding(
+                          padding: EdgeInsets.only(top: 14.0),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: SurveyProgressBuilder(
+                              builder: (ctx, idx, total) {
+                                return Center(
+                                    child: Text(
+                                  'Question ${idx + 1} of $total',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ));
+                              },
+                            ),
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 14.0),
+                        child: title,
+                      ),
+                      child,
+                    ],
+                  ),
                 ),
-                child,
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 32.0),
-                  child: OutlinedButton(
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                color: Theme.of(context).colorScheme.primary,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 14.0),
+                  child: ElevatedButton(
                     onPressed: isValid || step.isOptional
                         ? () => [
                               FocusScope.of(context).hasFocus
@@ -61,14 +92,14 @@ class StepView extends StatelessWidget {
                           'Next',
                       style: TextStyle(
                         color: isValid
-                            ? Theme.of(context).primaryColor
+                            ? Theme.of(context).colorScheme.onPrimary
                             : Colors.grey,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

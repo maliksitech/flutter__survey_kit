@@ -5,7 +5,9 @@ part 'text_answer_format.g.dart';
 
 @JsonSerializable()
 class TextAnswerFormat implements AnswerFormat {
-  final int? maxLines;
+  @JsonKey(defaultValue: 1)
+  final int maxLines;
+  final int? minLines;
   final String? defaultValue;
   @JsonKey(defaultValue: '')
   final String hint;
@@ -19,7 +21,8 @@ class TextAnswerFormat implements AnswerFormat {
   final String? validationRegEx;
 
   const TextAnswerFormat({
-    this.maxLines,
+    this.maxLines = 1,
+    this.minLines,
     this.hint = '',
     this.defaultValue,
     this.validationRegEx = '^(?!\s*\$).+',

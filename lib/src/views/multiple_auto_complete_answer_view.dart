@@ -67,7 +67,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                 textAlign: TextAlign.center,
               ),
             ),
-            Column(
+            ListWithSpacer(
               children: [
                 _AutoComplete(
                   suggestions: _multipleChoiceAnswer.suggestions,
@@ -148,6 +148,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                 ],
               ],
             ),
+            bottomSpacer,
           ],
         ),
       ),
