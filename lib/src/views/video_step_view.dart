@@ -123,14 +123,14 @@ class _VideoStepViewState extends State<VideoStepView> {
       isValid: !widget.videoStep.requirePlaythrough || isVideoEnd,
       step: widget.videoStep,
       title: SizedBox.shrink(),
-      child: Container(
-        alignment: Alignment.center,
-        width: widget.videoStep.width ?? MediaQuery.of(context).size.width,
-        height: widget.videoStep.height ?? MediaQuery.of(context).size.width,
-        child: Chewie(
-          controller: _chewieController!,
-        ),
-      ),
+      child: LayoutBuilder(builder: (context, box) {
+        return Container(
+          alignment: Alignment.center,
+          width: widget.videoStep.width ?? box.maxWidth,
+          height: widget.videoStep.height ?? box.maxWidth,
+          child: Chewie(controller: _chewieController!),
+        );
+      }),
     );
   }
 }
