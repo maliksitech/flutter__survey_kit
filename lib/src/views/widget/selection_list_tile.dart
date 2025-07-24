@@ -24,7 +24,10 @@ class SelectionListTile extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0),
                 border: Border.all(color: colors.tertiary, width: 1.5),
-                color: isSelected ? colors.tertiary.withOpacity(0.4) : null,
+                color: isSelected
+                    ? colors.tertiary
+                        .withValues(alpha: (0.4 * 255).round().toDouble())
+                    : null,
               ),
               duration: const Duration(milliseconds: 300),
               padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),

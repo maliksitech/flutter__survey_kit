@@ -33,7 +33,7 @@ class StepView extends StatelessWidget {
         context.read<SurveyProgressConfiguration>();
     return SizedBox.expand(
       child: Container(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Center(
           child: Column(
             children: [
