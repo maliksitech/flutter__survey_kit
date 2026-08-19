@@ -1,3 +1,7 @@
+# 0.1.5-maliksi
+- FIX: Remove the unused `camera` dependency so consumers do not bundle
+  microphone permission APIs for photo-only survey responses.
+
 # 0.1.3
 - INFO: Update dependencies (Flutter 3.10)
 - FIX: Fix validation of boolean answer format
